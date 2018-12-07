@@ -1,0 +1,8 @@
+Create a project
+Create a python envrolment 
+	virtualenv -p python3 envname
+Activate env
+	source envname/bin/activate
+Install the Django with pip (Python Package Manager)
+	pip install django
+Create a data base and update accordingly in settings file
