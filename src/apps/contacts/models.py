@@ -26,7 +26,7 @@ class AddressDetails(models.Model):
 	landmark = models.CharField(max_length=255, null=True, blank=True)
 	city = models.CharField(max_length=255, null=True, blank=True)
 	pincode = models.CharField(max_length=6, null=True, blank=True)
-	state = models.CharField(max_length=255) # for this values can be binded as well
+	state = models.CharField(max_length=255, null=True) # for this values can be binded as well
 
 class Relationship(ModelBase):
 	"""
@@ -52,7 +52,7 @@ class ContactDetails(ModelBase, AddressDetails):
 	"""
 	Storing Contact Addition Details with Versioning for different User
 	"""
-	contact = models.ForeignKey(User, related_name='contact_user', on_delete=models.CASCADE)
+	contact = models.ForeignKey(Contact, related_name='contact_user', on_delete=models.CASCADE)
 	name = models.CharField(max_length=255) # Will store the fullname
 	primary_mobile_number = models.CharField(max_length=13)
 	secondary_mobile_number = models.CharField(max_length=13, null=True, blank=True)
