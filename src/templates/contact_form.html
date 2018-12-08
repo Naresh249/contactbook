@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% if user and user.is_authenticated %}
+	{% block job_form %}
+		<h5> <strong> Here we add the Contact ! </strong></h5>
+				<span style="color: red;">{{error}}</span>
+				<form action="{{BASE_URL}}" method="post">{% csrf_token %}
+					
+					<div>
+						<input id="email_class" type="text" name="email" placeholder="Enter Email Id" pattern="[^ @]*@[^ @]*" required="true">
+					</div>
+					
+					<div>
+						<input id="name" type="text" name="name" placeholder="Name" required="true">
+					</div>
+
+					<div>
+						<input id="company_name" type="text" name="company_name" placeholder="Company Name">
+					</div>
+
+					<div>
+						<label>Relationship:</label><br>
+						<select id="relationship", name="relationship" required>
+							{% for obj in data %}
+								<option value="{{ obj.id }}", name="{{ obj.id }}" >{{obj.name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<div>
+						<input id="primary_mobile_number" type="text" name="primary_mobile_number" placeholder="Primary Mobile Number" maxlength="10" required>
+					</div>
+					
+					<div>
+						<input id="secondary_mobile_number" type="text" name="secondary_mobile_number" placeholder="Secondary Mobile Number" maxlength="10">
+					</div>
+					
+					<div>
+						<input id="occupation" type="text" name="occupation" placeholder="occupation">
+					</div>
+
+					<div>
+						<input id="address" type="text" name="address" placeholder="Address" required="true">
+					</div>
+
+					<div>
+						<input id="city" type="text" name="city" placeholder="City">
+					</div>
+					<input type="submit" style="margin-bottom: 200px;" name="submit" value="Done">
+				</form>
+	{% endblock %}
+{% endif %}

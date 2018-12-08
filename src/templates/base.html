@@ -46,7 +46,7 @@
                 <ul>
                     {% if user and not user.is_anonymous %}
                       <li>
-                          <a href="">Add Contact</a>
+                          <a href="{{ BASE_URL }}contact-form">Add Contact</a>
                       </li>
                     {% endif %}
                 </ul>
@@ -74,12 +74,14 @@
     {% endif %}
   </div>
 
-  <!-- <div class="container-post-job">
+  <div class="container-post-job">
     {% block job_form %} {% endblock %}
   </div>
+  
   <div class="container-local">
 	  {% block dashboard %} {% endblock %}
   </div>
+  <!--
   <div class="dash_headers" >
       {% block dashboard_header %} {% endblock %}
   </div> -->
