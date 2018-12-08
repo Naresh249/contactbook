@@ -1,0 +1,78 @@
+.container-local {
+	margin-top: 20px;
+}
+
+.dash_headers {
+    margin-top: 100px;
+    margin-left: : 500px;
+}
+
+.login-class {
+	margin-top: 100px;
+	margin-left: 550px;
+}
+
+.linkedin_logo {
+	width: 250px;
+	height: 80px;
+}
+
+.li-left {
+	padding-top: 10px;
+	float: right;
+	font-size: 20px;
+	margin-right: 200px;
+}
+
+.container-post-job {
+    padding-top: 80px;
+    margin-top: -80px;
+    margin-left: 400px;
+}
+
+input[type=text], select {
+    width: 35%;
+    padding: 8px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 35%;
+    padding: 8px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
