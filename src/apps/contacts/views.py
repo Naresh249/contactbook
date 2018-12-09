@@ -81,7 +81,18 @@ class Contacts(View):
 	def delete(self, request):
 		""" Deleting a contact"""
 		template_name = 'dashboard.html'
-		return render(request, template_name, context)
+		contact_details_id = request.body.decode().split("=")[1]
+		# Deleting mapping
+		UserContactMapping.objects.filter(
+			contact_details_id=contact_details_id).update(is_deleted=True)
+
+		# Need to fetch data here and return in the context so that it could be binded with page
+		data = contact_utils.fetch_user_contacts(request.user.id)
+		paginator = Paginator(data, 10)
+		context = {}
+		context['delete_msg'] ='Sucessfully Deleted Contact.'
+		context['contacts'] = paginator.page(1)
+		return render(request, template_name, context=context)
 
 
 class User(View):
