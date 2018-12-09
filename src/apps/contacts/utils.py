@@ -8,7 +8,7 @@ def fetch_user_contacts(user_id):
 	return data
 	"""
 	user_contacts = contact_models.UserContactMapping.objects.filter(
-			user_id=user_id, is_deleted=False).select_related('contact_details')
+			user_id=user_id, is_deleted=False).select_related('contact_details').order_by('-created_at')
 	user_contacts = contact_serializer.FetchContactDetailsSerializers(
 		user_contacts, many=True).data
 
