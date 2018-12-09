@@ -47,6 +47,7 @@ class Contacts(View):
 		context = {
 			'BASE_URL': settings.BASE_URL
 		}
+
 		contact_request_validator = contact_serializer.ContactDetailsSerializer(data=param)
 		if not contact_request_validator.is_valid():
 			template_name = 'contact_form.html'
@@ -56,6 +57,17 @@ class Contacts(View):
 		with transaction.atomic():
 			contact_details_params = contact_request_validator.validated_data
 			email_id = contact_details_params.pop('email', None)
+			if UserContactMapping.objects.filter(
+				user_id=request.user.id, 
+				contact_details__contact__email__iexact=email_id,
+				is_deleted=False).exists():
+				template_name = 'contact_form.html'
+				context['error'] = 'Email Can not be duplicate.'
+				relationship = Relationship.objects.filter(is_deleted=False).order_by('name')
+				relationship_data = contact_serializer.GetRelationshipSerializer(
+				relationship, many=True).data
+				context['data'] = relationship_data
+				return render(request, template_name, context=context)
 			# Fetching contach if not available creating
 			contact, created = Contact.objects.get_or_create(email=email_id, is_deleted=False)
 			contact_details_params['contact'] = contact
