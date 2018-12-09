@@ -100,11 +100,24 @@
 </div>	
 </footer>
 
+<script type="text/javascript">
+            var BASE_URL = '{{ BASE_URL }}';
+            
+</script>
+
+
 {% block head-javascript %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
 {% endblock %}
+
+{% csrf_token %}
+<script type="text/javascript">
+  // using jQuery
+  var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+</script>
 
 </html>

@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block dashboard %}
 	<table class="table table-bordered" style="margin-top: -30px;">
 	  <thead>
@@ -7,14 +6,30 @@
 	      <th>Name</th>
 	      <th>Email</th>
 	      <th>Primary Mobile</th>
+	      <th>Company Name</th>
+	      <th>Occupation</th>
+	      <th>Relationship</th>
+	      <th>Address</th>
+	      <th>Created At</th>
+	      <th>Delete</th>
+	      <th>Edit</th>
+
 	    </tr>
 	  </thead>
 	  <tbody>
+	  	{% csrf_token %}
 	    {% for contact in contacts %}
 	      <tr>
 	        <td>{{ contact.contact_details.name }}</td>
 	        <td>{{ contact.contact_details.email }}</td>
 	        <td>{{ contact.contact_details.primary_mobile_number }}</td>
+	        <td>{{ contact.contact_details.company_name }}</td>
+	        <td>{{ contact.contact_details.occupation }}</td>
+	        <td>{{ contact.contact_details.relationship }}</td>
+	        <td>{{ contact.contact_details.address }}</td>
+	        <td>{{ contact.created_at }}</td>
+	        <td><a href="" class="deleteUser" data-content={{ contact.contact_details.id }}>Delete</a></td>
+	        <td><a href="">Edit</a></td>
 	      </tr>
 	    {% endfor %}
 	  </tbody>
