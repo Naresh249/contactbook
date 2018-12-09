@@ -58,7 +58,11 @@ class FetchContactDetailsSerializers(serializers.ModelSerializer):
 	Fetching User Contact Details
 	"""
 	contact_details = GetContactDetailsSerializer()
+	created_at = serializers.SerializerMethodField()
+
+	def get_created_at(self, data):
+		return data.created_at.strftime('%Y-%m-%d')
 
 	class Meta:
 		model = UserContactMapping
-		fields = ('contact_details',)
+		fields = ('contact_details','created_at')
