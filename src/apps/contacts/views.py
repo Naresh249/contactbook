@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
+from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.shortcuts import render
 from django.views.generic import View
@@ -82,7 +83,7 @@ class Contacts(View):
 		""" Deleting a contact"""
 		template_name = 'dashboard.html'
 		contact_details_id = request.body.decode().split("=")[1]
-		# Deleting mapping
+		# Deleting mapping - user_id make sure authorization of data
 		UserContactMapping.objects.filter(
 			user_id=request.user.id,contact_details_id=contact_details_id).update(is_deleted=True)
 
@@ -143,6 +144,26 @@ def user_logout(request):
 	return render(
 		request, template_name, 
 		context={'BASE_URL': settings.BASE_URL, 'message': 'User Sucessfully Logout!'})
+
+@login_required
+def search_contact(request):
+	"""
+	Searching on pagination
+	"""
+	name_or_email = request.GET.get('search', '')
+	template_name = 'dashboard.html'
+	data = UserContactMapping.objects.filter(
+		(Q(contact_details__name__contains=name_or_email)\
+		 | Q(contact_details__contact__email__contains=name_or_email)),
+			user_id=request.user.id, is_deleted=False,).select_related(
+		'contact_details').order_by('-created_at')
+	contacts = contact_serializer.FetchContactDetailsSerializers(
+			data, many=True).data
+	paginator = Paginator(contacts, 10)
+	contacts = paginator.page(1)
+	return render(request, template_name, context={
+			'BASE_URL': settings.BASE_URL, 'contacts': contacts
+		})
 
 class ContactForm(View):
 	"""

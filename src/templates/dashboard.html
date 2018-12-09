@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+
 {% block dashboard %}
-	<table class="table table-bordered" style="margin-top: -30px;">
+	<input id="keyword" type="text" onkeypress="search_contact()" name="search" placeholder="Search by Name or Email....">
+	<table class="table table-bordered" style="">
 	  <thead>
 	    <tr>
 	      <th>Name</th>

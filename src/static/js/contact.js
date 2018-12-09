@@ -25,8 +25,22 @@ $(".deleteUser").click(function (e) {
             headers: {'X-CSRFToken': csrftoken},
             type: 'DELETE',
             success: function(response) {
-                alert(response);
+                console.log('success');
             }
         });
     });
+
+function search_contact() {
+    data = $('#keyword').val();
+    var csrftoken = getCookie('csrftoken');
+    $.ajax({
+            url: BASE_URL + 'search?search=' + data,
+            headers: {'X-CSRFToken': csrftoken},
+            type: 'get',
+            success: function(response) {
+                console.log('success');
+                /*alert(response);*/
+            }
+        });
+};
 
