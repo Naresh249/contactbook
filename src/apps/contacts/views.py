@@ -84,7 +84,7 @@ class Contacts(View):
 		contact_details_id = request.body.decode().split("=")[1]
 		# Deleting mapping
 		UserContactMapping.objects.filter(
-			contact_details_id=contact_details_id).update(is_deleted=True)
+			user_id=request.user.id,contact_details_id=contact_details_id).update(is_deleted=True)
 
 		# Need to fetch data here and return in the context so that it could be binded with page
 		data = contact_utils.fetch_user_contacts(request.user.id)
